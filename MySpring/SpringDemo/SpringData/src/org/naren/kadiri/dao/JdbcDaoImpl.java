@@ -17,49 +17,36 @@ import org.naren.kadiri.Circle;
 @Component
 public class JdbcDaoImpl {
 
-	
 	private DataSource dataSource;
 
 	private JdbcTemplate jdbcTemplate;// = new JdbcTemplate();
 
-	/*public Circle getCircle(int circleId) {
-		Connection conn = null;
-		try {
+	/*
+	 * public Circle getCircle(int circleId) { Connection conn = null; try {
+	 * 
+	 * conn = dataSource.getConnection(); PreparedStatement ps =
+	 * conn.prepareStatement("select * FROM circle WHERE id = ?"); ps.setInt(1,
+	 * circleId);
+	 * 
+	 * Circle circle = null; ResultSet rs = ps.executeQuery();
+	 * 
+	 * if (rs.next()) { circle = new Circle(circleId, rs.getString("name")); }
+	 * rs.close(); rs.close(); return circle;
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } finally { try { conn.close();
+	 * } catch (SQLException e) { } } return null; }
+	 */
 
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement("select * FROM circle WHERE id = ?");
-			ps.setInt(1, circleId);
-
-			Circle circle = null;
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				circle = new Circle(circleId, rs.getString("name"));
-			}
-			rs.close();
-			rs.close();
-			return circle;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-			}
-		}
-		return null;
-	}*/
-
+	// Returning int value fro query (queryForInt returns the int value)
 	public int getCircleCount() {
 		String sql = "SELECT COUNT(*) from CIRCLE";
-		//jdbcTemplate.setDataSource(getDataSurce());
 		return jdbcTemplate.queryForInt(sql);
 	}
 
 	public DataSource getDataSurce() {
 		return dataSource;
 	}
+
 	@Autowired
 	public void setDataSurce(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -72,5 +59,5 @@ public class JdbcDaoImpl {
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
+
 }
