@@ -17,10 +17,10 @@ import org.naren.kadiri.Circle;
 @Component
 public class JdbcDaoImpl {
 
-	@Autowired
+	
 	private DataSource dataSource;
 
-	private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+	private JdbcTemplate jdbcTemplate;// = new JdbcTemplate();
 
 	/*public Circle getCircle(int circleId) {
 		Connection conn = null;
@@ -53,16 +53,16 @@ public class JdbcDaoImpl {
 
 	public int getCircleCount() {
 		String sql = "SELECT COUNT(*) from CIRCLE";
-		jdbcTemplate.setDataSource(getDataSurce());
+		//jdbcTemplate.setDataSource(getDataSurce());
 		return jdbcTemplate.queryForInt(sql);
 	}
 
 	public DataSource getDataSurce() {
 		return dataSource;
 	}
-
+	@Autowired
 	public void setDataSurce(DataSource dataSource) {
-		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	public JdbcTemplate getJdbcTemplate() {
@@ -73,6 +73,4 @@ public class JdbcDaoImpl {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	
-
 }

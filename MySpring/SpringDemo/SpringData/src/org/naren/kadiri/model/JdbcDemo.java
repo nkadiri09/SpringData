@@ -8,11 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class JdbcDemo {
 
 	public static void main(String[] args) {
-
-		/*
-		 * Circle circle = new JdbcDaoImpl().getCircle(1);
-		 * System.out.println(circle.getName());
-		 */
+ 
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		JdbcDaoImpl dao = context.getBean("jdbcDaoImpl", JdbcDaoImpl.class);
 
