@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -54,6 +55,11 @@ public class JdbcDaoImpl {
 	public Circle getCircleNameById(int id) {
 		String sql = "SELECT name from CIRCLE where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new CircleMapper());
+	}
+	
+	public List<Circle> getCircleNameById() {
+		String sql = "SELECT name from CIRCLE";
+		return jdbcTemplate.query(sql, new CircleMapper());
 	}
 
 	private static final class CircleMapper implements RowMapper<Circle> {
