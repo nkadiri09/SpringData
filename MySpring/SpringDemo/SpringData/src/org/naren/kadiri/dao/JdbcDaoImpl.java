@@ -39,8 +39,14 @@ public class JdbcDaoImpl {
 
 	// Returning int value fro query (queryForInt returns the int value)
 	public int getCircleCount() {
-		String sql = "SELECT COUNT(*) from CIRCLE";
+		String sql = "SELECT name from CIRCLE where id = ?";
+
 		return jdbcTemplate.queryForInt(sql);
+	}
+
+	public String getCircleName(int id) {
+		String sql = "SELECT name from CIRCLE where id = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
 	}
 
 	public DataSource getDataSurce() {
