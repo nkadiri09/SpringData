@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import org.naren.kadiri.Circle;
@@ -44,9 +45,27 @@ public class JdbcDaoImpl {
 		return jdbcTemplate.queryForInt(sql);
 	}
 
+	// Writing Stirng object from Database
 	public String getCircleName(int id) {
 		String sql = "SELECT name from CIRCLE where id = ?";
 		return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
+	}
+
+	public Circle getCircleNameById(int id) {
+		String sql = "SELECT name from CIRCLE where id = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new CircleMapper());
+	}
+
+	private static final class CircleMapper implements RowMapper<Circle> {
+
+		@Override
+		public Circle mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+			Circle circle = new Circle();
+			circle.setId(resultSet.getInt("Id"));
+			circle.setName(resultSet.getString("Name"));
+			return circle;
+		}
+
 	}
 
 	public DataSource getDataSurce() {
