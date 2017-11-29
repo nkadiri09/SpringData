@@ -73,6 +73,12 @@ public class JdbcDaoImpl {
 		}
 
 	}
+	
+	
+	public void insertCircle(Circle circle) {
+		String sql = "INSERT into circle (id, name) VALUES (?,?)";
+		jdbcTemplate.update(sql, new Object[] {circle.getId(), circle.getName()});
+	}
 
 	public DataSource getDataSurce() {
 		return dataSource;

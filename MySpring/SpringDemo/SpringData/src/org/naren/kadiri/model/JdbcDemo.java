@@ -17,7 +17,9 @@ public class JdbcDemo {
 		// System.out.println(dao.getCircleCount());
 		//System.out.println(dao.getCircleName(1));
 		//System.out.println(dao.getCircleNameById(1).getName());
-		System.out.println(dao.getCircleNameById());
+		//System.out.println(dao.getCircleNameById());
+		dao.insertCircle(new Circle(3,"third Circle"));
+		System.out.println(dao.getCircleNameById().size());
 	}
 
 }
